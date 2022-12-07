@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    permissions:
       statuses: read
     steps:
     - uses: 'actions/checkout@v3'
@@ -18,7 +17,7 @@ jobs:
     - uses: actions/github-script@v6
       with:
         script: |
-          const res = await github.rest.checks.listForRef({
+          const res = await github.rest.repos.listCommitStatusesForRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
             ref: "${{ steps.git.outputs.commit_sha }}",
