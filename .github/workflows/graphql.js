@@ -39,13 +39,13 @@ module.exports = async (_, { context, github }) => {
   // 誤って ref で取得しようとしてみる
   {
     const res = await github.graphql(query, { ...context.repo, expression: context.ref })
-    console.dir(JSON.stringify(res, null, "\t"))
+    console.log(JSON.stringify(res, null, "\t"))
   }
 
   // commit ref をちゃんと指定したもの
   {
     const res = await github.graphql(query, { ...context.repo, expression: context.sha })
-    console.dir(JSON.stringify(res, null, "\t"))
+    console.log(JSON.stringify(res, null, "\t"))
   }
 
   return
