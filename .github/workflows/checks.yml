@@ -20,6 +20,6 @@ jobs:
           const res = await github.rest.checks.listForRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: "${{ steps.git.outputs.commit_sha }}",
+            ref: "${{ github.sha }}",
           })
           console.log(JSON.stringify(res, null, "\t"))

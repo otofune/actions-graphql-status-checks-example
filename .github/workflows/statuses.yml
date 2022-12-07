@@ -9,17 +9,12 @@ jobs:
       statuses: read
     steps:
     - uses: 'actions/checkout@v3'
-    - id: git
-      name: get commit ref
-      run: |
-        git rev-parse HEAD^{commit}
-        echo "::set-output name=commit_sha::$(git rev-parse HEAD^{commit})"
     - uses: actions/github-script@v6
       with:
         script: |
           const res = await github.rest.repos.listCommitStatusesForRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: "${{ steps.git.outputs.commit_sha }}",
+            ref: "${{ github.sha }}",
           })
           console.log(JSON.stringify(res, null, "\t"))

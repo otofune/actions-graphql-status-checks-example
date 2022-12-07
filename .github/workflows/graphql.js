@@ -35,15 +35,17 @@ const query = `query commitRef($owner: String!, $repo: String!, $expression: Str
 }
 `
 
-module.exports = async (_, { context, github }) => {
-  // 誤って ref で取得しようとしてみる
+module.exports = async ({ context, github }) => {
+  // get with ref (will break with tag ref) 
   {
+    console.log(context.ref)
     const res = await github.graphql(query, { ...context.repo, expression: context.ref })
     console.log(JSON.stringify(res, null, "\t"))
   }
 
-  // commit ref をちゃんと指定したもの
+  // get with sha
   {
+    console.log(context.sha)
     const res = await github.graphql(query, { ...context.repo, expression: context.sha })
     console.log(JSON.stringify(res, null, "\t"))
   }
