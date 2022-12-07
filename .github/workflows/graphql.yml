@@ -1,4 +1,4 @@
-name: Get and dump Rollup object (GraphQL)
+name: Get status checks
 on:
   workflow_dispatch: # manual
   push:
