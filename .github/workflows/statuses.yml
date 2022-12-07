@@ -4,6 +4,10 @@ on: workflow_dispatch # dispatch manually
 jobs:
   job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    permissions:
+      statuses: read
     steps:
     - uses: 'actions/checkout@v3'
     - id: git
