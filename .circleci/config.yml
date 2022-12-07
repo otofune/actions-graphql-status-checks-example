@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: exit on rerun
+          command: |
+            [ $(( $RANDOM % 2 )) == 0 ] && exit 0 || exit 1
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test

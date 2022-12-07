@@ -1,0 +1,8 @@
+name: random
+on: push
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+    - run: "[ $(( $RANDOM % 2 )) == 0 ] && exit 0 || exit 1"

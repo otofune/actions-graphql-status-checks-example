@@ -1,0 +1,20 @@
+name: Get and dump Statuses API (REST)
+on: workflow_dispatch # dispatch manually
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: 'actions/checkout@v3'
+    - id: git
+      name: get commit ref
+      run: |
+        echo "::set-output name=commit_sha::$(git rev-parse HEAD^{commit})"
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          console.dir(await github.rest.checks.listForRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: "${{ steps.git.commit_sha }}",
+          }))
