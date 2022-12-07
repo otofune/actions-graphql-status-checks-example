@@ -82,7 +82,9 @@ const statusFromCheckRollupContextConnection = (c) => {
 
 module.exports = async ({ context, github }) => {
   // get with sha
-  const res = await github.graphql(query, { ...context.repo, expression: context.sha })
+  const vars = { ...context.repo, expression: context.sha }
+  console.dir(vars)
+  const res = await github.graphql(query, vars)
   console.log(JSON.stringify(res, null, "\t"))
 
   if (!res.repository.object) throw new Error("object is null")
