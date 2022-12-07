@@ -11,7 +11,7 @@ jobs:
     - id: git
       name: get commit ref
       run: |
-        echo ${{ context.github.ref }}
+        echo ${{ github.ref }}
         echo "::set-output name=commit_sha::$(git rev-parse HEAD^{commit})"
     - uses: actions/github-script@v6
       with:
