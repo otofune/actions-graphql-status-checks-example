@@ -12,9 +12,21 @@ jobs:
     - uses: actions/github-script@v6
       with:
         script: |
-          const res = await github.rest.repos.listCommitStatusesForRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: "${{ github.sha }}",
-          })
-          console.log(JSON.stringify(res, null, "\t"))
+          {
+            console.log("== list ==")
+            const res = await github.rest.repos.listCommitStatusesForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "${{ github.sha }}",
+            })
+            console.log(JSON.stringify(res, null, "\t"))
+          }
+          {
+            console.log("== combined ==")
+            const res = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "${{ github.sha }}",
+            })
+            console.log(JSON.stringify(res, null, "\t"))
+          }
