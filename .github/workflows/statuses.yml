@@ -13,6 +13,7 @@ jobs:
     - id: git
       name: get commit ref
       run: |
+        git rev-parse HEAD^{commit}
         echo "::set-output name=commit_sha::$(git rev-parse HEAD^{commit})"
     - uses: actions/github-script@v6
       with:
@@ -20,5 +21,5 @@ jobs:
           console.dir(await github.rest.checks.listForRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: "${{ steps.git.commit_sha }}",
+            ref: "${{ steps.git.outputs.commit_sha }}",
           }))

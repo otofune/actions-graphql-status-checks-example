@@ -1,4 +1,4 @@
-name: Get and dump GraphQL Rollup object (REST)
+name: Get and dump Rollup object (GraphQL)
 on: workflow_dispatch # manual
 
 jobs:
@@ -16,4 +16,4 @@ jobs:
     - uses: actions/github-script@v6
       with:
         script: |
-          await require("./.github/workflows/graphql.js")("${{ steps.git.commit_sha }}", { context, github })
+          await require("./.github/workflows/graphql.js")("${{ steps.git.outputs.commit_sha }}", { context, github })
