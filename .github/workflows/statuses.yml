@@ -18,8 +18,9 @@ jobs:
     - uses: actions/github-script@v6
       with:
         script: |
-          console.dir(await github.rest.checks.listForRef({
+          const res = await github.rest.checks.listForRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
             ref: "${{ steps.git.outputs.commit_sha }}",
-          }))
+          })
+          console.log(JSON.stringify(res, null, "\t"))

@@ -1,5 +1,5 @@
-name: random
-on: push
+name: random fail
+on: workflow_dispatch # manual
 
 jobs:
   job:
