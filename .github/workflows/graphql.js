@@ -88,7 +88,7 @@ module.exports = async ({ context, github }) => {
   if (!res.repository.object) throw new Error("object is null")
   if (res.repository.object.__typename !== "Commit") throw new Error("Object is not commit: " + res.repository.object.__typename)
 
-  const { statusCheckRollup: { contexts }} = res.repository.object
+  const { statusCheckRollup: { contexts: { nodes: contexts } }} = res.repository.object
   const filteredContext = contexts.filter(c => {
     if (c.__typename === "CheckRun" && c.permalink.includes(context.runId.toString(10))) {
       console.log("exclude self context")
